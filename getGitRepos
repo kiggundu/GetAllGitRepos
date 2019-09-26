@@ -1,0 +1,13 @@
+REPO=$1
+echo "curl https://api.github.com/users/$REPO/repos | grep \"clone_url\" > $REPO-repos"
+curl https://api.github.com/users/$REPO/repos | grep \"clone_url\" > $REPO-repos
+echo "chmod a+x $REPO-repos"
+chmod a+x $1-repos
+echo "sed -i bak 's/\"clone_url\"\:/git clone/g' $REPO-repos"
+sed -i bak 's/\"clone_url\"\:/git clone/g' $REPO-repos
+echo "sed -i bak 's/\,//g' $REPO-repos"
+sed -i bak 's/\,//g' $REPO-repos
+echo "./$REPO-repos"
+./$REPO-repos
+
+
